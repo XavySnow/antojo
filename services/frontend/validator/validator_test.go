@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Modified by the Antojo project, 2026
 
 package validator
 
@@ -109,8 +111,8 @@ func TestAddToCartPassesValidation(t *testing.T) {
 		quantity  uint64
 		productID string
 	}{
-		{"valid min quantity and product id", 1, "OLJCESPC7Z"},
-		{"valid max quantity and product id", 10, "OLJCESPC7Z"},
+		{"valid min quantity and product id", 1, "TORTAHOGADA"},
+		{"valid max quantity and product id", 10, "TORTAHOGADA"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -128,8 +130,8 @@ func TestAddToCartFailsValidation(t *testing.T) {
 		quantity  uint64
 		productID string
 	}{
-		{"invalid min quantity", 0, "OLJCESPC7Z"},
-		{"invalid max quantity", 11, "OLJCESPC7Z"},
+		{"invalid min quantity", 0, "TORTAHOGADA"},
+		{"invalid max quantity", 11, "TORTAHOGADA"},
 		{"invalid product id", 1, ""},
 		{"invalid quantity and product id", 0, ""},
 	}

@@ -1,112 +1,158 @@
 {
     "products": [
         {
-            "id": "OLJCESPC7Z",
-            "name": "Sunglasses",
-            "description": "Add a modern touch to your outfits with these sleek aviator sunglasses.",
-            "picture": "/static/img/products/sunglasses.jpg",
+            "id": "TORTAHOGADA",
+            "name": "Torta ahogada",
+            "description": "Birote salado relleno de carnitas, bañado en salsa de jitomate y chile de árbol al gusto.",
+            "picture": "/static/img/products/tortahogada.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 19,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 95,
+                "nanos": 0
             },
-            "categories": ["accessories"]
+            "categories": [
+                "tortas"
+            ]
         },
         {
-            "id": "66VCHSJNUP",
-            "name": "Tank Top",
-            "description": "Perfectly cropped cotton tank, with a scooped neckline.",
-            "picture": "/static/img/products/tank-top.jpg",
+            "id": "TORTAMEDIA",
+            "name": "Torta media ahogada",
+            "description": "Torta de carnitas con salsa de jitomate y un toque leve de chile, para quien empieza.",
+            "picture": "/static/img/products/tortamedia.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 18,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 95,
+                "nanos": 0
             },
-            "categories": ["clothing", "tops"]
+            "categories": [
+                "tortas"
+            ]
         },
         {
-            "id": "1YMWWN1N4O",
-            "name": "Watch",
-            "description": "This gold-tone stainless steel watch will work with most of your outfits.",
-            "picture": "/static/img/products/watch.jpg",
+            "id": "BIRRIACHIVO",
+            "name": "Birria de chivo",
+            "description": "Birria tatemada de chivo con su consomé, cebolla, cilantro y tortillas hechas a mano.",
+            "picture": "/static/img/products/birriachivo.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 109,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 165,
+                "nanos": 0
             },
-            "categories": ["accessories"]
+            "categories": [
+                "caldos"
+            ]
         },
         {
-            "id": "L9ECAV7KIM",
-            "name": "Loafers",
-            "description": "A neat addition to your summer wardrobe.",
-            "picture": "/static/img/products/loafers.jpg",
+            "id": "CARNEJUGO",
+            "name": "Carne en su jugo",
+            "description": "Caldo de res con tocino, frijoles de la olla, cebollitas asadas y cilantro.",
+            "picture": "/static/img/products/carnejugo.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 89,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 175,
+                "nanos": 0
             },
-            "categories": ["footwear"]
+            "categories": [
+                "caldos"
+            ]
         },
         {
-            "id": "2ZYFJ3GM2N",
-            "name": "Hairdryer",
-            "description": "This lightweight hairdryer has 3 heat and speed settings. It's perfect for travel.",
-            "picture": "/static/img/products/hairdryer.jpg",
+            "id": "POZOLEROJO",
+            "name": "Pozole rojo",
+            "description": "Pozole de cerdo con chile guajillo, lechuga, rábano, orégano y tostadas.",
+            "picture": "/static/img/products/pozolerojo.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 24,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 140,
+                "nanos": 0
             },
-            "categories": ["hair", "beauty"]
+            "categories": [
+                "caldos"
+            ]
         },
         {
-            "id": "0PUK6V6EV0",
-            "name": "Candle Holder",
-            "description": "This small but intricate candle holder is an excellent gift.",
-            "picture": "/static/img/products/candle-holder.jpg",
+            "id": "TACOSBARBACOA",
+            "name": "Tacos de barbacoa",
+            "description": "Orden de cuatro tacos de barbacoa de res con salsa verde.",
+            "picture": "/static/img/products/tacosbarbacoa.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 18,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 110,
+                "nanos": 0
             },
-            "categories": ["decor", "home"]
+            "categories": [
+                "tacos"
+            ]
         },
         {
-            "id": "LS4PSXUNUM",
-            "name": "Salt & Pepper Shakers",
-            "description": "Add some flavor to your kitchen.",
-            "picture": "/static/img/products/salt-and-pepper-shakers.jpg",
+            "id": "LONCHEPIERNA",
+            "name": "Lonche de pierna",
+            "description": "Lonche de pierna adobada en birote con aguacate y salsa casera.",
+            "picture": "/static/img/products/lonchepierna.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 18,
-                "nanos": 490000000
+                "currencyCode": "MXN",
+                "units": 85,
+                "nanos": 0
             },
-            "categories": ["kitchen"]
+            "categories": [
+                "tortas"
+            ]
         },
         {
-            "id": "9SIQT8TOJO",
-            "name": "Bamboo Glass Jar",
-            "description": "This bamboo glass jar can hold 57 oz (1.7 l) and is perfect for any kitchen.",
-            "picture": "/static/img/products/bamboo-glass-jar.jpg",
+            "id": "TEJUINO",
+            "name": "Tejuino",
+            "description": "Bebida fermentada de maíz con nieve de limón, sal y chile en polvo.",
+            "picture": "/static/img/products/tejuino.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 5,
-                "nanos": 490000000
+                "currencyCode": "MXN",
+                "units": 45,
+                "nanos": 0
             },
-            "categories": ["kitchen"]
+            "categories": [
+                "bebidas"
+            ]
         },
         {
-            "id": "6E92ZMYYFZ",
-            "name": "Mug",
-            "description": "A simple mug with a mustard interior.",
-            "picture": "/static/img/products/mug.jpg",
+            "id": "AGUAJAMAICA",
+            "name": "Agua de jamaica",
+            "description": "Agua fresca de flor de jamaica, endulzada al punto. Medio litro.",
+            "picture": "/static/img/products/aguajamaica.jpg",
             "priceUsd": {
-                "currencyCode": "USD",
-                "units": 8,
-                "nanos": 990000000
+                "currencyCode": "MXN",
+                "units": 35,
+                "nanos": 0
             },
-            "categories": ["kitchen"]
+            "categories": [
+                "bebidas"
+            ]
+        },
+        {
+            "id": "JERICALLA",
+            "name": "Jericalla",
+            "description": "Postre tapatío de leche, huevo, vainilla y canela con su costra dorada.",
+            "picture": "/static/img/products/jericalla.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 55,
+                "nanos": 0
+            },
+            "categories": [
+                "postres"
+            ]
+        },
+        {
+            "id": "BIONICO",
+            "name": "Bionico",
+            "description": "Fruta picada con crema dulce, granola, coco y pasas.",
+            "picture": "/static/img/products/bionico.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 60,
+                "nanos": 0
+            },
+            "categories": [
+                "postres"
+            ]
         }
     ]
 }

@@ -39,7 +39,7 @@ import (
 
 const (
 	port            = "8080"
-	defaultCurrency = "USD"
+	defaultCurrency = "MXN"
 	cookieMaxAge    = 60 * 60 * 48
 
 	cookiePrefix    = "shop_"
@@ -49,6 +49,7 @@ const (
 
 var (
 	whitelistedCurrencies = map[string]bool{
+		"MXN": true,
 		"USD": true,
 		"EUR": true,
 		"CAD": true,
