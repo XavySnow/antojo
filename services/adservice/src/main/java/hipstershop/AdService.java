@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by the Antojo project, 2026
  */
 
 package hipstershop;
@@ -146,49 +148,49 @@ public final class AdService {
     }
   }
 
+  /** Restaurant promos keyed by menu category (tortas, caldos, tacos, bebidas, postres). */
   private static ImmutableListMultimap<String, Ad> createAdsMap() {
-    Ad hairdryer =
+    Ad tortaAhogada =
         Ad.newBuilder()
-            .setRedirectUrl("/product/2ZYFJ3GM2N")
-            .setText("Hairdryer for sale. 50% off.")
+            .setRedirectUrl("/product/TORTAHOGADA")
+            .setText("Martes de tortas ahogadas: 2x1 de 1 a 4 pm.")
             .build();
-    Ad tankTop =
+    Ad lonche =
         Ad.newBuilder()
-            .setRedirectUrl("/product/66VCHSJNUP")
-            .setText("Tank top for sale. 20% off.")
+            .setRedirectUrl("/product/LONCHEPIERNA")
+            .setText("Lonche de pierna + agua fresca por $99.")
             .build();
-    Ad candleHolder =
+    Ad birria =
         Ad.newBuilder()
-            .setRedirectUrl("/product/0PUK6V6EV0")
-            .setText("Candle holder for sale. 30% off.")
+            .setRedirectUrl("/product/BIRRIACHIVO")
+            .setText("Birria del fin de semana: consomé extra gratis.")
             .build();
-    Ad bambooGlassJar =
+    Ad carneEnSuJugo =
         Ad.newBuilder()
-            .setRedirectUrl("/product/9SIQT8TOJO")
-            .setText("Bamboo glass jar for sale. 10% off.")
+            .setRedirectUrl("/product/CARNEJUGO")
+            .setText("Carne en su jugo con 15% de descuento en tu primer pedido.")
             .build();
-    Ad watch =
+    Ad tacos =
         Ad.newBuilder()
-            .setRedirectUrl("/product/1YMWWN1N4O")
-            .setText("Watch for sale. Buy one, get second kit for free")
+            .setRedirectUrl("/product/TACOSBARBACOA")
+            .setText("Domingo de barbacoa: quinto taco gratis.")
             .build();
-    Ad mug =
+    Ad tejuino =
         Ad.newBuilder()
-            .setRedirectUrl("/product/6E92ZMYYFZ")
-            .setText("Mug for sale. Buy two, get third one for free")
+            .setRedirectUrl("/product/TEJUINO")
+            .setText("Tejuino bien frío a $35 con cualquier platillo.")
             .build();
-    Ad loafers =
+    Ad jericalla =
         Ad.newBuilder()
-            .setRedirectUrl("/product/L9ECAV7KIM")
-            .setText("Loafers for sale. Buy one, get second one for free")
+            .setRedirectUrl("/product/JERICALLA")
+            .setText("Cierra con jericalla: 2 por $90.")
             .build();
     return ImmutableListMultimap.<String, Ad>builder()
-        .putAll("clothing", tankTop)
-        .putAll("accessories", watch)
-        .putAll("footwear", loafers)
-        .putAll("hair", hairdryer)
-        .putAll("decor", candleHolder)
-        .putAll("kitchen", bambooGlassJar, mug)
+        .putAll("tortas", tortaAhogada, lonche)
+        .putAll("caldos", birria, carneEnSuJugo)
+        .putAll("tacos", tacos)
+        .putAll("bebidas", tejuino)
+        .putAll("postres", jericalla)
         .build();
   }
 
