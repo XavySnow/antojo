@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Modified by the Antojo project, 2026
 
 package main
 
@@ -19,9 +21,9 @@ import (
 	"math/rand"
 )
 
-// CreateTrackingId generates a tracking ID.
+// CreateTrackingId generates an Antojo tracking ID such as ANT-QX-26123-13456789.
 func CreateTrackingId(salt string) string {
-	return fmt.Sprintf("%c%c-%d%s-%d%s",
+	return fmt.Sprintf("ANT-%c%c-%d%s-%d%s",
 		getRandomLetterCode(),
 		getRandomLetterCode(),
 		len(salt),

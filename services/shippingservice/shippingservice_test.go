@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Modified by the Antojo project, 2026
 
 package main
 
@@ -30,10 +32,10 @@ func TestGetQuote(t *testing.T) {
 	// A basic test case to test logic and protobuf interactions.
 	req := &pb.GetQuoteRequest{
 		Address: &pb.Address{
-			StreetAddress: "Muffin Man",
-			City:          "London",
-			State:         "",
-			Country:       "England",
+			StreetAddress: "Av. Chapultepec 123",
+			City:          "Guadalajara",
+			State:         "Jalisco",
+			Country:       "Mexico",
 		},
 		Items: []*pb.CartItem{
 			{
@@ -51,8 +53,8 @@ func TestGetQuote(t *testing.T) {
 	if err != nil {
 		t.Errorf("TestGetQuote (%v) failed", err)
 	}
-	if res.CostUsd.GetUnits() != 8 || res.CostUsd.GetNanos() != 990000000 {
-		t.Errorf("TestGetQuote: Quote value '%d.%d' does not match expected '8.990000000'", res.CostUsd.GetUnits(), res.CostUsd.GetNanos())
+	if res.CostUsd.GetCurrencyCode() != "MXN" || res.CostUsd.GetUnits() != 35 || res.CostUsd.GetNanos() != 0 {
+		t.Errorf("TestGetQuote: got %s %d.%d, want MXN 35.0", res.CostUsd.GetCurrencyCode(), res.CostUsd.GetUnits(), res.CostUsd.GetNanos())
 	}
 }
 
@@ -86,10 +88,10 @@ func TestShipOrder(t *testing.T) {
 	// A basic test case to test logic and protobuf interactions.
 	req := &pb.ShipOrderRequest{
 		Address: &pb.Address{
-			StreetAddress: "Muffin Man",
-			City:          "London",
-			State:         "",
-			Country:       "England",
+			StreetAddress: "Av. Chapultepec 123",
+			City:          "Guadalajara",
+			State:         "Jalisco",
+			Country:       "Mexico",
 		},
 		Items: []*pb.CartItem{
 			{
@@ -107,19 +109,19 @@ func TestShipOrder(t *testing.T) {
 	if err != nil {
 		t.Errorf("TestShipOrder (%v) failed", err)
 	}
-	if len(res.TrackingId) != 18 {
-		t.Errorf("TestShipOrder: Tracking ID is malformed - has %d characters, %d expected", len(res.TrackingId), 18)
+	if len(res.TrackingId) != 22 {
+		t.Errorf("TestShipOrder: Tracking ID is malformed - has %d characters, %d expected", len(res.TrackingId), 22)
 	}
 }
 
 // TestTrackingIdFormat verifies the tracking ID matches the expected pattern.
 func TestTrackingIdFormat(t *testing.T) {
-	pattern := regexp.MustCompile(`^[A-Z]{2}-\d+-\d+$`)
+	pattern := regexp.MustCompile(`^ANT-[A-Z]{2}-\d+-\d+$`)
 
 	for i := 0; i < 20; i++ {
 		id := CreateTrackingId("test-salt-value")
 		if !pattern.MatchString(id) {
-			t.Errorf("CreateTrackingId: '%s' does not match expected pattern '[A-Z]{2}-\\d+-\\d+'", id)
+			t.Errorf("CreateTrackingId: '%s' does not match expected pattern 'ANT-[A-Z]{2}-\\d+-\\d+'", id)
 		}
 	}
 }
@@ -154,9 +156,9 @@ func TestCreateQuoteFromFloat(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			q := CreateQuoteFromFloat(tc.value)
-			if q.Dollars != tc.dollars || q.Cents != tc.cents {
+			if q.Units != tc.dollars || q.Cents != tc.cents {
 				t.Errorf("CreateQuoteFromFloat(%v) = $%d.%d, want $%d.%d",
-					tc.value, q.Dollars, q.Cents, tc.dollars, tc.cents)
+					tc.value, q.Units, q.Cents, tc.dollars, tc.cents)
 			}
 		})
 	}
@@ -165,12 +167,12 @@ func TestCreateQuoteFromFloat(t *testing.T) {
 // TestCreateQuoteFromCount verifies count-based quote generation.
 func TestCreateQuoteFromCount(t *testing.T) {
 	zeroQuote := CreateQuoteFromCount(0)
-	if zeroQuote.Dollars != 0 || zeroQuote.Cents != 0 {
+	if zeroQuote.Units != 0 || zeroQuote.Cents != 0 {
 		t.Errorf("CreateQuoteFromCount(0) = %s, want $0.0", zeroQuote)
 	}
 
 	nonZeroQuote := CreateQuoteFromCount(5)
-	if nonZeroQuote.Dollars == 0 && nonZeroQuote.Cents == 0 {
+	if nonZeroQuote.Units == 0 && nonZeroQuote.Cents == 0 {
 		t.Error("CreateQuoteFromCount(5) returned zero, expected a non-zero quote")
 	}
 }
@@ -198,9 +200,29 @@ func TestGetRandomNumber(t *testing.T) {
 
 // TestQuoteString verifies the string representation of a Quote.
 func TestQuoteString(t *testing.T) {
-	q := Quote{Dollars: 8, Cents: 99}
-	expected := "$8.99"
+	q := Quote{Units: 8, Cents: 99}
+	expected := "$8.99 MXN"
 	if q.String() != expected {
 		t.Errorf("Quote.String() = '%s', want '%s'", q.String(), expected)
+	}
+}
+
+// TestFreeDeliveryThreshold verifies large orders get free delivery.
+func TestFreeDeliveryThreshold(t *testing.T) {
+	if q := CreateQuoteFromCount(FreeDeliveryMinItems - 1); q.Units != 35 {
+		t.Errorf("CreateQuoteFromCount(%d) = %s, want $35.00 MXN", FreeDeliveryMinItems-1, q)
+	}
+	if q := CreateQuoteFromCount(FreeDeliveryMinItems); q.Units != 0 || q.Cents != 0 {
+		t.Errorf("CreateQuoteFromCount(%d) = %s, want free delivery", FreeDeliveryMinItems, q)
+	}
+}
+
+// TestEstimateETAMinutes verifies the ETA stays within 25 to 45 minutes.
+func TestEstimateETAMinutes(t *testing.T) {
+	for _, n := range []int{1, 3, 10, 100} {
+		lo, hi := EstimateETAMinutes(n)
+		if lo != MinETAMinutes || hi < lo || hi > MaxETAMinutes {
+			t.Errorf("EstimateETAMinutes(%d) = %d-%d, want within %d-%d", n, lo, hi, MinETAMinutes, MaxETAMinutes)
+		}
 	}
 }

@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Modified by the Antojo project, 2026
 
 package main
 
@@ -115,29 +117,32 @@ func (s *server) Watch(req *healthpb.HealthCheckRequest, ws healthpb.Health_Watc
 	return status.Errorf(codes.Unimplemented, "health check via Watch not implemented")
 }
 
-// GetQuote produces a shipping quote (cost) in USD.
+// GetQuote produces a delivery fee quote in MXN. The response field is still
+// named cost_usd to keep the gRPC contract unchanged.
 func (s *server) GetQuote(ctx context.Context, in *pb.GetQuoteRequest) (*pb.GetQuoteResponse, error) {
 	log.Info("[GetQuote] received request")
 	defer log.Info("[GetQuote] completed request")
 
-	// 1. Generate a quote based on the total number of items to be shipped.
+	// 1. Generate a delivery fee based on the total number of items.
 	count := 0
 	for _, item := range in.Items {
 		count += int(item.Quantity)
 	}
 	quote := CreateQuoteFromCount(count)
+	etaMin, etaMax := EstimateETAMinutes(count)
+	log.Infof("[GetQuote] delivery fee %s, ETA %d-%d min", quote, etaMin, etaMax)
 
 	// 2. Generate a response.
 	return &pb.GetQuoteResponse{
 		CostUsd: &pb.Money{
-			CurrencyCode: "USD",
-			Units:        int64(quote.Dollars),
+			CurrencyCode: DeliveryCurrency,
+			Units:        int64(quote.Units),
 			Nanos:        int32(quote.Cents * 10000000)},
 	}, nil
 
 }
 
-// ShipOrder mocks that the requested items will be shipped.
+// ShipOrder mocks that the requested dishes will be delivered.
 // It supplies a tracking ID for notional lookup of shipment delivery status.
 func (s *server) ShipOrder(ctx context.Context, in *pb.ShipOrderRequest) (*pb.ShipOrderResponse, error) {
 	log.Info("[ShipOrder] received request")
