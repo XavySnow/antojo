@@ -1,4 +1,4 @@
-module github.com/GoogleCloudPlatform/microservices-demo/src/shippingservice
+module github.com/XavySnow/antojo/services/shippingservice
 
 go 1.26.0
 

@@ -1,4 +1,4 @@
-module github.com/GoogleCloudPlatform/microservices-demo/src/productcatalogservice
+module github.com/XavySnow/antojo/services/productcatalogservice
 
 go 1.25.8
 

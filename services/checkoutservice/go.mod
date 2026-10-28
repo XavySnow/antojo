@@ -1,4 +1,4 @@
-module github.com/GoogleCloudPlatform/microservices-demo/src/checkoutservice
+module github.com/XavySnow/antojo/services/checkoutservice
 
 go 1.25.0
 

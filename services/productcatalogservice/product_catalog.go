@@ -19,7 +19,7 @@ import (
 	"strings"
 	"time"
 
-	pb "github.com/GoogleCloudPlatform/microservices-demo/src/productcatalogservice/genproto"
+	pb "github.com/XavySnow/antojo/services/productcatalogservice/genproto"
 	"google.golang.org/grpc/codes"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/status"

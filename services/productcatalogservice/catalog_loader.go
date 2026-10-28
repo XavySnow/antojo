@@ -25,7 +25,7 @@ import (
 	"cloud.google.com/go/alloydbconn"
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"cloud.google.com/go/secretmanager/apiv1/secretmanagerpb"
-	pb "github.com/GoogleCloudPlatform/microservices-demo/src/productcatalogservice/genproto"
+	pb "github.com/XavySnow/antojo/services/productcatalogservice/genproto"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

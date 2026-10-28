@@ -31,8 +31,8 @@ import (
 	"google.golang.org/grpc/health"
 	"google.golang.org/grpc/status"
 
-	pb "github.com/GoogleCloudPlatform/microservices-demo/src/checkoutservice/genproto"
-	money "github.com/GoogleCloudPlatform/microservices-demo/src/checkoutservice/money"
+	pb "github.com/XavySnow/antojo/services/checkoutservice/genproto"
+	money "github.com/XavySnow/antojo/services/checkoutservice/money"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
