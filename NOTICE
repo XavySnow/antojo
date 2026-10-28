@@ -1,0 +1,19 @@
+Antojo
+Copyright 2026 Javier Carbajal Cruz
+
+This product includes software derived from Online Boutique
+(https://github.com/GoogleCloudPlatform/microservices-demo), developed by
+Google LLC and licensed under the Apache License, Version 2.0.
+Upstream commit: c7cb6d5
+
+The code under services/ and protos/ is derived from that project. Original
+copyright and license headers have been preserved, and modified files carry a
+"Modified by the Antojo project, 2026" notice. A copy of the Apache License
+2.0 is available at https://www.apache.org/licenses/LICENSE-2.0 and in
+LICENSE-APACHE-2.0.
+
+Files authored by the Antojo project outside services/ and protos/ are
+licensed under the MIT License (see LICENSE).
+
+Antojo is not affiliated with or endorsed by Google. No Google trademarks or
+logos are used in the Antojo branding.

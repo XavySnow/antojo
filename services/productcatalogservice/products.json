@@ -1,0 +1,158 @@
+{
+    "products": [
+        {
+            "id": "TORTAHOGADA",
+            "name": "Torta ahogada",
+            "description": "Birote salado relleno de carnitas, bañado en salsa de jitomate y chile de árbol al gusto.",
+            "picture": "/static/img/products/tortahogada.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 95,
+                "nanos": 0
+            },
+            "categories": [
+                "tortas"
+            ]
+        },
+        {
+            "id": "TORTAMEDIA",
+            "name": "Torta media ahogada",
+            "description": "Torta de carnitas con salsa de jitomate y un toque leve de chile, para quien empieza.",
+            "picture": "/static/img/products/tortamedia.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 95,
+                "nanos": 0
+            },
+            "categories": [
+                "tortas"
+            ]
+        },
+        {
+            "id": "BIRRIACHIVO",
+            "name": "Birria de chivo",
+            "description": "Birria tatemada de chivo con su consomé, cebolla, cilantro y tortillas hechas a mano.",
+            "picture": "/static/img/products/birriachivo.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 165,
+                "nanos": 0
+            },
+            "categories": [
+                "caldos"
+            ]
+        },
+        {
+            "id": "CARNEJUGO",
+            "name": "Carne en su jugo",
+            "description": "Caldo de res con tocino, frijoles de la olla, cebollitas asadas y cilantro.",
+            "picture": "/static/img/products/carnejugo.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 175,
+                "nanos": 0
+            },
+            "categories": [
+                "caldos"
+            ]
+        },
+        {
+            "id": "POZOLEROJO",
+            "name": "Pozole rojo",
+            "description": "Pozole de cerdo con chile guajillo, lechuga, rábano, orégano y tostadas.",
+            "picture": "/static/img/products/pozolerojo.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 140,
+                "nanos": 0
+            },
+            "categories": [
+                "caldos"
+            ]
+        },
+        {
+            "id": "TACOSBARBACOA",
+            "name": "Tacos de barbacoa",
+            "description": "Orden de cuatro tacos de barbacoa de res con salsa verde.",
+            "picture": "/static/img/products/tacosbarbacoa.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 110,
+                "nanos": 0
+            },
+            "categories": [
+                "tacos"
+            ]
+        },
+        {
+            "id": "LONCHEPIERNA",
+            "name": "Lonche de pierna",
+            "description": "Lonche de pierna adobada en birote con aguacate y salsa casera.",
+            "picture": "/static/img/products/lonchepierna.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 85,
+                "nanos": 0
+            },
+            "categories": [
+                "tortas"
+            ]
+        },
+        {
+            "id": "TEJUINO",
+            "name": "Tejuino",
+            "description": "Bebida fermentada de maíz con nieve de limón, sal y chile en polvo.",
+            "picture": "/static/img/products/tejuino.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 45,
+                "nanos": 0
+            },
+            "categories": [
+                "bebidas"
+            ]
+        },
+        {
+            "id": "AGUAJAMAICA",
+            "name": "Agua de jamaica",
+            "description": "Agua fresca de flor de jamaica, endulzada al punto. Medio litro.",
+            "picture": "/static/img/products/aguajamaica.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 35,
+                "nanos": 0
+            },
+            "categories": [
+                "bebidas"
+            ]
+        },
+        {
+            "id": "JERICALLA",
+            "name": "Jericalla",
+            "description": "Postre tapatío de leche, huevo, vainilla y canela con su costra dorada.",
+            "picture": "/static/img/products/jericalla.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 55,
+                "nanos": 0
+            },
+            "categories": [
+                "postres"
+            ]
+        },
+        {
+            "id": "BIONICO",
+            "name": "Bionico",
+            "description": "Fruta picada con crema dulce, granola, coco y pasas.",
+            "picture": "/static/img/products/bionico.jpg",
+            "priceUsd": {
+                "currencyCode": "MXN",
+                "units": 60,
+                "nanos": 0
+            },
+            "categories": [
+                "postres"
+            ]
+        }
+    ]
+}

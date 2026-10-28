@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2020 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+ Modified by the Antojo project, 2026
+-->
+
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8">
+    <title>Antojo: confirmación de tu pedido</title>
+  </head>
+  <style>
+    body { font-family: 'DejaVu Sans', Arial, sans-serif; color: #2b2b2b; }
+    h2 { color: #B3261E; }
+    th, td { text-align: left; padding: 4px 8px; }
+  </style>
+  <body>
+    <h2>¡Gracias por tu pedido en Antojo!</h2>
+    <p>Ya lo estamos preparando. Llega en 25 a 45 minutos aproximadamente.</p>
+    <h3>Número de pedido</h3>
+    <p>#{{ order.order_id }}</p>
+    <h3>Entrega</h3>
+    <p>Rastreo: {{ order.shipping_tracking_id }}</p>
+    <p>Costo de envío: ${{ order.shipping_cost.units }}.{{ "%02d" | format(order.shipping_cost.nanos // 10000000) }} {{ order.shipping_cost.currency_code }}</p>
+    <p>{{ order.shipping_address.street_address }}, {{ order.shipping_address.city }}, {{ order.shipping_address.state }}, {{ order.shipping_address.country }} C.P. {{ order.shipping_address.zip_code }}</p>
+    <h3>Tu pedido</h3>
+    <table style="width:100%">
+        <tr>
+          <th>Platillo</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+        </tr>
+        {% for item in order.items %}
+        <tr>
+          <td>{{ item.item.product_id }}</td>
+          <td>{{ item.item.quantity }}</td>
+          <td>${{ item.cost.units }}.{{ "%02d" | format(item.cost.nanos // 10000000) }} {{ item.cost.currency_code }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>¡Buen provecho!<br>El equipo de Antojo, Guadalajara</p>
+  </body>
+</html>

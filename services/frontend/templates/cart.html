@@ -1,0 +1,235 @@
+<!--
+ Copyright 2020 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+ Modified by the Antojo project, 2026
+-->
+
+{{ define "cart" }}
+    {{ template "header" . }}
+
+    <div {{ with $.platform_css }} class="{{.}}" {{ end }}>
+        <span class="platform-flag">
+            {{$.platform_name}}
+        </span>
+    </div>
+
+    <main role="main" class="cart-sections">
+
+        {{ if eq (len $.items) 0 }}
+        <section class="empty-cart-section">
+            <h3>¡Tu pedido está vacío!</h3>
+            <p>Los platillos que agregues aparecerán aquí.</p>
+            <a class="ant-button-primary" href="{{ $.baseUrl }}/" role="button">Seguir pidiendo</a>
+        </section>
+        {{ else }}
+        <section class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-xl-5 offset-xl-1 cart-summary-section">
+
+                    <div class="row mb-3 py-2">
+                        <div class="col-4 pl-md-0">
+                            <h3>Tu pedido ({{ $.cart_size }})</h3>
+                        </div>
+                        <div class="col-8 pr-md-0 text-right">
+                            <form method="POST" action="{{ $.baseUrl }}/cart/empty">
+                                <button class="ant-button-secondary cart-summary-empty-cart-button" type="submit">
+                                    Vaciar pedido
+                                </button>
+                                <a class="ant-button-primary" href="{{ $.baseUrl }}/" role="button">
+                                    Seguir pidiendo
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+
+                    {{ range $.items }}
+                    <div class="row cart-summary-item-row">
+                        <div class="col-md-4 pl-md-0">
+                            <a href="{{ $.baseUrl }}/product/{{.Item.Id}}">
+                                <img class="img-fluid" alt="" src="{{ $.baseUrl }}{{.Item.Picture}}" />
+                            </a>
+                        </div>
+                        <div class="col-md-8 pr-md-0">
+                            <div class="row">
+                                <div class="col">
+                                    <h4>{{ .Item.Name }}</h4>
+                                </div>
+                            </div>
+                            <div class="row cart-summary-item-row-item-id-row">
+                                <div class="col">
+                                    SKU #{{ .Item.Id }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Cantidad: {{ .Quantity }}
+                                </div>
+                                <div class="col pr-md-0 text-right">
+                                    <strong>
+                                        {{ renderMoney .Price }}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+
+                    <div class="row cart-summary-shipping-row">
+                        <div class="col pl-md-0">Envío</div>
+                        <div class="col pr-md-0 text-right">{{ renderMoney .shipping_cost }}</div>
+                    </div>
+
+                    <div class="row cart-summary-total-row">
+                        <div class="col pl-md-0">Total</div>
+                        <div class="col pr-md-0 text-right">{{ renderMoney .total_cost }}</div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5 offset-lg-1 col-xl-4">
+
+                    <form class="cart-checkout-form" action="{{ $.baseUrl }}/cart/checkout" method="POST">
+
+                        <div class="row">
+                            <div class="col">
+                                <h3>Dirección de entrega</h3>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col ant-form-field">
+                                <label for="email">Correo electrónico</label>
+                                <input type="email" id="email"
+                                    name="email" value="cliente@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col ant-form-field">
+                                <label for="street_address">Calle y número</label>
+                                <input type="text" name="street_address"
+                                    id="street_address" value="Av. Chapultepec 123, Col. Americana" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col ant-form-field">
+                                <label for="zip_code">Código postal</label>
+                                <input type="text"
+                                    name="zip_code" id="zip_code" value="44160" required pattern="\d{4,5}">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col ant-form-field">
+                                <label for="city">Ciudad</label>
+                                <input type="text" name="city" id="city"
+                                    value="Guadalajara" required>
+                                </div>
+                            </div>
+
+                        <div class="form-row">
+                            <div class="col-md-5 ant-form-field">
+                                <label for="state">Estado</label>
+                                <input type="text" name="state" id="state"
+                                    value="Jalisco" required>
+                            </div>
+                            <div class="col-md-7 ant-form-field">
+                                <label for="country">País</label>
+                                <input type="text" id="country"
+                                    placeholder="País"
+                                    name="country" value="México" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="payment-method-heading">Método de pago</h3>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col ant-form-field">
+                                <label for="credit_card_number">Número de tarjeta</label>
+                                <input type="text" id="credit_card_number"
+                                    name="credit_card_number"
+                                    placeholder="0000000000000000"
+                                    value="4432801561520454"
+                                    required pattern="\d{16}">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-5 ant-form-field">
+                                <label for="credit_card_expiration_month">Mes</label>
+                                <select name="credit_card_expiration_month" id="credit_card_expiration_month">
+                                    <option value="1">Enero</option>
+                                    <option value="2">Febrero</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Mayo</option>
+                                    <option value="6">Junio</option>
+                                    <option value="7">Julio</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
+                                <img src="{{ $.baseUrl }}/static/icons/down-arrow.svg" alt="" class="ant-dropdown-chevron">
+                            </div>
+                            <div class="col-md-4 ant-form-field">
+                                    <label for="credit_card_expiration_year">Año</label>
+                                    <select name="credit_card_expiration_year" id="credit_card_expiration_year">
+                                    {{ range $i, $y := $.expiration_years}}<option value="{{$y}}"
+                                        {{if eq $i 1 -}}
+                                            selected="selected"
+                                        {{- end}}
+                                    >{{$y}}</option>{{end}}
+                                    </select>
+                                    <img src="{{ $.baseUrl }}/static/icons/down-arrow.svg" alt="" class="ant-dropdown-chevron">
+                                </div>
+                            <div class="col-md-3 ant-form-field">
+                                <label for="credit_card_cvv">CVV</label>
+                                <input type="password" id="credit_card_cvv"
+                                    name="credit_card_cvv" value="672" required pattern="\d{3}">
+                            </div>
+                        </div>
+
+                        <div class="form-row justify-content-center">
+                            <div class="col text-center">
+                                <button class="ant-button-primary" type="submit">
+                                    Hacer pedido
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </section>
+        {{ end }} <!-- end if $.items -->
+
+    </main>
+
+    {{ if $.recommendations }}
+        {{ template "recommendations" $ }}
+    {{ end }}
+
+    {{ template "footer" . }}
+{{ end }}
