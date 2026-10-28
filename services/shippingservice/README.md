@@ -1,6 +1,6 @@
 # Shipping Service
 
-The Shipping service provides price quote, tracking IDs, and the impression of order fulfillment & shipping processes.
+The shipping service quotes the MXN delivery fee and issues ANT- tracking IDs for Antojo orders.
 
 ## Local
 
@@ -10,7 +10,7 @@ Run the following command to restore dependencies to `vendor/` directory:
 
 ## Build
 
-From `src/shippingservice`, run:
+From `services/shippingservice`, run:
 
 ```
 docker build ./
