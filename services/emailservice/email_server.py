@@ -13,6 +13,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# Modified by the Antojo project, 2026
 
 from concurrent import futures
 import argparse
@@ -77,7 +79,7 @@ class EmailService(BaseEmailService):
         "to": [{
           "address_spec": email_address
         }],
-        "subject": "Your Confirmation Email",
+        "subject": "Antojo: tu pedido va en camino",
         "html_body": content
       }
     )
