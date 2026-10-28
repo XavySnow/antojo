@@ -12,6 +12,8 @@
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
+
+ Modified by the Antojo project, 2026
 -->
 
 {{ define "cart" }}
@@ -27,9 +29,9 @@
 
         {{ if eq (len $.items) 0 }}
         <section class="empty-cart-section">
-            <h3>Your shopping cart is empty!</h3>
-            <p>Items you add to your shopping cart will appear here.</p>
-            <a class="cymbal-button-primary" href="{{ $.baseUrl }}/" role="button">Continue Shopping</a>
+            <h3>¡Tu pedido está vacío!</h3>
+            <p>Los platillos que agregues aparecerán aquí.</p>
+            <a class="ant-button-primary" href="{{ $.baseUrl }}/" role="button">Seguir pidiendo</a>
         </section>
         {{ else }}
         <section class="container">
@@ -39,15 +41,15 @@
 
                     <div class="row mb-3 py-2">
                         <div class="col-4 pl-md-0">
-                            <h3>Cart ({{ $.cart_size }})</h3>
+                            <h3>Tu pedido ({{ $.cart_size }})</h3>
                         </div>
                         <div class="col-8 pr-md-0 text-right">
                             <form method="POST" action="{{ $.baseUrl }}/cart/empty">
-                                <button class="cymbal-button-secondary cart-summary-empty-cart-button" type="submit">
-                                    Empty Cart
+                                <button class="ant-button-secondary cart-summary-empty-cart-button" type="submit">
+                                    Vaciar pedido
                                 </button>
-                                <a class="cymbal-button-primary" href="{{ $.baseUrl }}/" role="button">
-                                    Continue Shopping
+                                <a class="ant-button-primary" href="{{ $.baseUrl }}/" role="button">
+                                    Seguir pidiendo
                                 </a>
                             </form>
                         </div>
@@ -73,7 +75,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    Quantity: {{ .Quantity }}
+                                    Cantidad: {{ .Quantity }}
                                 </div>
                                 <div class="col pr-md-0 text-right">
                                     <strong>
@@ -86,7 +88,7 @@
                     {{ end }}
 
                     <div class="row cart-summary-shipping-row">
-                        <div class="col pl-md-0">Shipping</div>
+                        <div class="col pl-md-0">Envío</div>
                         <div class="col pr-md-0 text-right">{{ renderMoney .shipping_cost }}</div>
                     </div>
 
@@ -103,65 +105,65 @@
 
                         <div class="row">
                             <div class="col">
-                                <h3>Shipping Address</h3>
+                                <h3>Dirección de entrega</h3>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col cymbal-form-field">
-                                <label for="email">E-mail Address</label>
+                            <div class="col ant-form-field">
+                                <label for="email">Correo electrónico</label>
                                 <input type="email" id="email"
-                                    name="email" value="someone@example.com" required>
+                                    name="email" value="cliente@example.com" required>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col cymbal-form-field">
-                                <label for="street_address">Street Address</label>
+                            <div class="col ant-form-field">
+                                <label for="street_address">Calle y número</label>
                                 <input type="text" name="street_address"
-                                    id="street_address" value="1600 Amphitheatre Parkway" required>
+                                    id="street_address" value="Av. Chapultepec 123, Col. Americana" required>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col cymbal-form-field">
-                                <label for="zip_code">Zip Code</label>
+                            <div class="col ant-form-field">
+                                <label for="zip_code">Código postal</label>
                                 <input type="text"
-                                    name="zip_code" id="zip_code" value="94043" required pattern="\d{4,5}">
+                                    name="zip_code" id="zip_code" value="44160" required pattern="\d{4,5}">
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col cymbal-form-field">
-                                <label for="city">City</label>
+                            <div class="col ant-form-field">
+                                <label for="city">Ciudad</label>
                                 <input type="text" name="city" id="city"
-                                    value="Mountain View" required>
+                                    value="Guadalajara" required>
                                 </div>
                             </div>
 
                         <div class="form-row">
-                            <div class="col-md-5 cymbal-form-field">
-                                <label for="state">State</label>
+                            <div class="col-md-5 ant-form-field">
+                                <label for="state">Estado</label>
                                 <input type="text" name="state" id="state"
-                                    value="CA" required>
+                                    value="Jalisco" required>
                             </div>
-                            <div class="col-md-7 cymbal-form-field">
-                                <label for="country">Country</label>
+                            <div class="col-md-7 ant-form-field">
+                                <label for="country">País</label>
                                 <input type="text" id="country"
-                                    placeholder="Country Name"
-                                    name="country" value="United States" required>
+                                    placeholder="País"
+                                    name="country" value="México" required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <h3 class="payment-method-heading">Payment Method</h3>
+                                <h3 class="payment-method-heading">Método de pago</h3>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="col cymbal-form-field">
-                                <label for="credit_card_number">Credit Card Number</label>
+                            <div class="col ant-form-field">
+                                <label for="credit_card_number">Número de tarjeta</label>
                                 <input type="text" id="credit_card_number"
                                     name="credit_card_number"
                                     placeholder="0000000000000000"
@@ -171,26 +173,26 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="col-md-5 cymbal-form-field">
-                                <label for="credit_card_expiration_month">Month</label>
+                            <div class="col-md-5 ant-form-field">
+                                <label for="credit_card_expiration_month">Mes</label>
                                 <select name="credit_card_expiration_month" id="credit_card_expiration_month">
-                                    <option value="1">January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">March</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">August</option>
-                                    <option value="9">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">January</option>
+                                    <option value="1">Enero</option>
+                                    <option value="2">Febrero</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Mayo</option>
+                                    <option value="6">Junio</option>
+                                    <option value="7">Julio</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
                                 </select>
-                                <img src="{{ $.baseUrl }}/static/icons/Hipster_DownArrow.svg" alt="" class="cymbal-dropdown-chevron">
+                                <img src="{{ $.baseUrl }}/static/icons/down-arrow.svg" alt="" class="ant-dropdown-chevron">
                             </div>
-                            <div class="col-md-4 cymbal-form-field">
-                                    <label for="credit_card_expiration_year">Year</label>
+                            <div class="col-md-4 ant-form-field">
+                                    <label for="credit_card_expiration_year">Año</label>
                                     <select name="credit_card_expiration_year" id="credit_card_expiration_year">
                                     {{ range $i, $y := $.expiration_years}}<option value="{{$y}}"
                                         {{if eq $i 1 -}}
@@ -198,9 +200,9 @@
                                         {{- end}}
                                     >{{$y}}</option>{{end}}
                                     </select>
-                                    <img src="{{ $.baseUrl }}/static/icons/Hipster_DownArrow.svg" alt="" class="cymbal-dropdown-chevron">
+                                    <img src="{{ $.baseUrl }}/static/icons/down-arrow.svg" alt="" class="ant-dropdown-chevron">
                                 </div>
-                            <div class="col-md-3 cymbal-form-field">
+                            <div class="col-md-3 ant-form-field">
                                 <label for="credit_card_cvv">CVV</label>
                                 <input type="password" id="credit_card_cvv"
                                     name="credit_card_cvv" value="672" required pattern="\d{3}">
@@ -209,8 +211,8 @@
 
                         <div class="form-row justify-content-center">
                             <div class="col text-center">
-                                <button class="cymbal-button-primary" type="submit">
-                                    Place Order
+                                <button class="ant-button-primary" type="submit">
+                                    Hacer pedido
                                 </button>
                             </div>
                         </div>

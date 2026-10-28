@@ -12,6 +12,8 @@
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
+
+ Modified by the Antojo project, 2026
 -->
 
 {{ define "product" }}
@@ -37,18 +39,18 @@
 
           {{ if $.packagingInfo }}
           <div class="product-packaging">
-            <h3>Packaging</h3>
+            <h3>Empaque</h3>
             <span>
-              Weight: {{ if $.packagingInfo.Weight }}{{ $.packagingInfo.Weight }}lb{{ else }}n/a{{ end }}
+              Peso: {{ if $.packagingInfo.Weight }}{{ $.packagingInfo.Weight }}lb{{ else }}n/a{{ end }}
             </span>
             <span>
-              Width: {{ if $.packagingInfo.Width }}{{ $.packagingInfo.Width }}cm{{ else }}n/a{{ end }}
+              Ancho: {{ if $.packagingInfo.Width }}{{ $.packagingInfo.Width }}cm{{ else }}n/a{{ end }}
             </span>
             <span>
-              Height: {{ if $.packagingInfo.Height }}{{ $.packagingInfo.Height }}cm{{ else }}n/a{{ end }}
+              Alto: {{ if $.packagingInfo.Height }}{{ $.packagingInfo.Height }}cm{{ else }}n/a{{ end }}
             </span>
             <span>
-              Depth: {{ if $.packagingInfo.Depth }}{{ $.packagingInfo.Depth }}cm{{ else }}n/a{{ end }}
+              Fondo: {{ if $.packagingInfo.Depth }}{{ $.packagingInfo.Depth }}cm{{ else }}n/a{{ end }}
             </span>
           </div>
           {{ end }}
@@ -64,9 +66,9 @@
                 <option>5</option>
                 <option>10</option>
               </select>
-              <img src="{{ $.baseUrl }}/static/icons/Hipster_DownArrow.svg" alt="">
+              <img src="{{ $.baseUrl }}/static/icons/down-arrow.svg" alt="">
             </div>
-            <button type="submit" class="cymbal-button-primary">Add To Cart</button>
+            <button type="submit" class="ant-button-primary">Agregar al pedido</button>
           </form>
         </div>
       </div>

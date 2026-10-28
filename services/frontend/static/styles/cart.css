@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by the Antojo project, 2026
  */
 
 .cart-sections {
@@ -25,7 +27,7 @@
     font-weight: normal;
 }
 
-.cart-sections a.cymbal-button-primary:hover {
+.cart-sections a.ant-button-primary:hover {
     text-decoration: none;
     color: white;
 }
@@ -105,6 +107,6 @@
 }
 
 /* "Place Order" button */
-.cart-checkout-form .cymbal-button-primary {
+.cart-checkout-form .ant-button-primary {
     margin-top: 36px;
 }

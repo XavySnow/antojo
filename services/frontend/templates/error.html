@@ -12,6 +12,8 @@
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
+
+ Modified by the Antojo project, 2026
 -->
 
 {{ define "error" }}
@@ -24,10 +26,10 @@
     <main role="main">
         <div class="py-5">
             <div class="container bg-light py-3 px-lg-5 py-lg-5">
-                <h1>Uh, oh!</h1>
-                <p>Something has failed. Below are some details for debugging.</p>
+                <h1>¡Ay, caray!</h1>
+                <p>Algo falló. Abajo hay detalles para depurar.</p>
 
-                <p><strong>HTTP Status:</strong> {{.status_code}} {{.status}}</p>
+                <p><strong>Estado HTTP:</strong> {{.status_code}} {{.status}}</p>
                 <pre class="border border-danger p-3"
                     style="white-space: pre-wrap; word-break: keep-all;">
                     {{- .error -}}

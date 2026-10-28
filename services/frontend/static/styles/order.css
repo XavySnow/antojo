@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by the Antojo project, 2026
  */
 
 .order {
@@ -43,11 +45,11 @@
     border-bottom: 1px solid rgba(154, 160, 166, 0.5);
 }
 
-.order-complete-section .cymbal-button-primary {
+.order-complete-section .ant-button-primary {
     margin-top: 24px;
 }
 
-.order-complete-section a.cymbal-button-primary:hover {
+.order-complete-section a.ant-button-primary:hover {
     text-decoration: none;
     color: white;
 }

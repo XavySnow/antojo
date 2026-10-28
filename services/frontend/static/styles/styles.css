@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by the Antojo project, 2026
  */
 
 /* General */
@@ -30,7 +32,7 @@ body {
 /* Header */
 
 header {
-  background-color: #853B5C;
+  background-color: #B3261E;
   color: white;
 }
 
@@ -68,7 +70,7 @@ header .cart-size-circle {
   font-size: 11px;
   border-radius: 4px 4px 0 4px;
   color: white;
-  background-color: #853B5C;
+  background-color: #B3261E;
 }
 
 header .navbar {
@@ -208,7 +210,7 @@ header .top-left-logo {
   height: 40px;
 }
 
-header .top-left-logo-cymbal {
+header .top-left-logo {
   height: 30px;
 }
 
@@ -244,7 +246,7 @@ footer.py-5 {
 
 footer .footer-top {
   padding: 60px 0px;
-  background-color: #570D2E;
+  background-color: #7A1712;
   color: white;
 }
 
@@ -306,12 +308,12 @@ main {
 
 .home-mobile-hero-banner {
   height: 200px;
-  background: url(/static/images/folded-clothes-on-white-chair-wide.jpg) no-repeat top center;
+  background: url(/static/images/hero-wide.png) no-repeat top center;
   background-size: cover;
 }
 
 .home-desktop-left-image {
-  background: url(/static/images/folded-clothes-on-white-chair.jpg) no-repeat center;
+  background: url(/static/images/hero.png) no-repeat center;
   background-size: cover;
 }
 
@@ -375,7 +377,7 @@ similar to that of the hot-products-row.
 .home-desktop-footer-row {
   padding-left: 9%;
   padding-right: 9%;
-  background-color: #570D2E;
+  background-color: #7A1712;
   width: 100%;
   margin: 0;
 }
@@ -384,7 +386,7 @@ similar to that of the hot-products-row.
 
 .ad {
   position: relative;
-  background-color: #FF9A9B;
+  background-color: #F2A541;
   font-size: 24px;
   text-align: center;
 }
@@ -481,7 +483,7 @@ similar to that of the hot-products-row.
   height: 5px;
 }
 
-.h-product .cymbal-button-primary {
+.h-product .ant-button-primary {
   margin-top: 16px;
 }
 
@@ -586,16 +588,11 @@ select {
   -webkit-border-radius: 0px;
 }
 
-/* Cymbal */
+/* Buttons and form fields */
 
-/*
-If we ever decide to create a separate Cymbal CSS library for Cymbal components,
-the rules below could be extracted.
-*/
-
-.cymbal-button-primary, .cymbal-button-secondary {
+.ant-button-primary, .ant-button-secondary {
   display: inline-block;
-  border: solid 1px #CE0631;
+  border: solid 1px #C2410C;
   padding: 8px 16px;
   outline: none;
   font-size: 14px;
@@ -603,49 +600,49 @@ the rules below could be extracted.
   cursor: pointer;
 }
 
-.cymbal-button-primary:focus, .cymbal-button-secondary:focus {
+.ant-button-primary:focus, .ant-button-secondary:focus {
   outline: none; /* To override browser (Chrome) default blue outline. */
 }
 
-.cymbal-button-primary {
-  background-color: #CE0631;
+.ant-button-primary {
+  background-color: #C2410C;
   color: white;
 }
 
-.cymbal-button-primary:active,
-.cymbal-button-primary:focus,
-.cymbal-button-primary:hover {
-  border: solid 1px #7b031d;
-  background-color: #7b031d;
+.ant-button-primary:active,
+.ant-button-primary:focus,
+.ant-button-primary:hover {
+  border: solid 1px #9A3412;
+  background-color: #9A3412;
   box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 30%);
 }
 
-.cymbal-button-primary:active {
+.ant-button-primary:active {
   box-shadow: 0px 3px 6px 0px rgb(0 0 0 / 30%);
 }
 
-.cymbal-button-secondary {
+.ant-button-secondary {
   background: none;
-  color: #CE0631;
+  color: #C2410C;
 }
 
-.cymbal-button-secondary:active,
-.cymbal-button-secondary:focus,
-.cymbal-button-secondary:hover {
-  color: #7b031d;
-  border: solid 1px #7b031d;
+.ant-button-secondary:active,
+.ant-button-secondary:focus,
+.ant-button-secondary:hover {
+  color: #9A3412;
+  border: solid 1px #9A3412;
 }
 
-.cymbal-button-secondary:active {
-  background-color: #f5ccd5;
+.ant-button-secondary:active {
+  background-color: #FDE7D3;
 }
 
-.cymbal-form-field {
+.ant-form-field {
   position: relative;
   margin-top: 24px;
 }
 
-.cymbal-form-field label {
+.ant-form-field label {
   width: 100%;
   margin: 0;
   padding: 8px 16px 0 16px;
@@ -657,10 +654,10 @@ the rules below could be extracted.
   background-color: white;
 }
 
-.cymbal-form-field input[type='email'],
-.cymbal-form-field input[type='password'],
-.cymbal-form-field select,
-.cymbal-form-field input[type='text'] {
+.ant-form-field input[type='email'],
+.ant-form-field input[type='password'],
+.ant-form-field select,
+.ant-form-field input[type='text'] {
   width: 100%;
   border: none;
   border-bottom: 1px solid #9AA0A6;
@@ -669,7 +666,7 @@ the rules below could be extracted.
   color: #1E2021;
 }
 
-.cymbal-form-field .cymbal-dropdown-chevron {
+.ant-form-field .ant-dropdown-chevron {
   position: absolute;
   right: 25px;
   width: 10px;
