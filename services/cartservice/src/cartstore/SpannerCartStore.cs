@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Modified by the Antojo project, 2026
 
 using System;
 using Google.Cloud.Spanner.Data;
@@ -23,7 +25,7 @@ namespace cartservice.cartstore
     public class SpannerCartStore : ICartStore
     {
         private static readonly string TableName = "CartItems";
-        private static readonly string DefaultInstanceName = "onlineboutique";
+        private static readonly string DefaultInstanceName = "antojo";
         private static readonly string DefaultDatabaseName = "carts";
         private readonly string databaseString;
 
