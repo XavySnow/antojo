@@ -1,0 +1,11 @@
+Antojo is installed in {{ .Release.Namespace }}.
+Inspect: kubectl get pods,svc,pdb -n {{ .Release.Namespace }}
+{{- if .Values.frontend.externalService }}
+Address (provisioning can take several minutes):
+  kubectl get svc frontend-external -n {{ .Release.Namespace }}
+{{- else if .Values.frontend.gateway.enabled }}
+Address: kubectl get gateway antojo -n {{ .Release.Namespace }}
+{{- else }}
+Local access: kubectl port-forward -n {{ .Release.Namespace }} svc/frontend 8080:80
+{{- end }}
+HTTP only. Use synthetic data; this is not a production payment system.

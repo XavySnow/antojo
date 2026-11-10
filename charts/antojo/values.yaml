@@ -1,0 +1,292 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Modified by the Antojo project, 2026: Antojo registry and Autopilot defaults.
+
+# Adapted from upstream: same service DNS names, ports and health checks.
+# One release per namespace: application gRPC addresses use these stable names.
+# The render-only build-required tag is replaced with a SHA by the deploy script.
+# Requests fit General-purpose Autopilot without bursting (250m / 512Mi).
+# Load generation is opt-in: it consumes resources and generates log volume.
+# frontend.externalService and frontend.gateway.enabled are mutually exclusive.
+# Redis is disposable lab data: its emptyDir is lost on Pod replacement.
+global:
+  imageRegistry: us-central1-docker.pkg.dev/antojo-lab/antojo
+  imageTag: build-required
+  imagePullPolicy: IfNotPresent
+frontend:
+  externalService: true
+  gateway:
+    enabled: false
+    className: gke-l7-global-external-managed
+    hostname: ''
+redis:
+  image:
+    repository: redis
+    tag: 7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+      ephemeral-storage: 100Mi
+    limits:
+      cpu: '1'
+      memory: 1Gi
+      ephemeral-storage: 1Gi
+  maxmemory: 256mb
+services:
+  frontend:
+    enabled: true
+    replicas: 2
+    image:
+      tag: ''
+    port: 8080
+    servicePort: 80
+    health: http
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '8080'
+      PRODUCT_CATALOG_SERVICE_ADDR: productcatalogservice:3550
+      CURRENCY_SERVICE_ADDR: currencyservice:7000
+      CART_SERVICE_ADDR: cartservice:7070
+      RECOMMENDATION_SERVICE_ADDR: recommendationservice:8080
+      SHIPPING_SERVICE_ADDR: shippingservice:50051
+      CHECKOUT_SERVICE_ADDR: checkoutservice:5050
+      AD_SERVICE_ADDR: adservice:9555
+      ENV_PLATFORM: gcp
+      ENABLE_TRACING: '0'
+      ENABLE_PROFILER: '0'
+  productcatalogservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 3550
+    servicePort: 3550
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '3550'
+      DISABLE_PROFILER: '1'
+      ENABLE_TRACING: '0'
+      EXTRA_LATENCY: '0'
+  cartservice:
+    enabled: true
+    replicas: 2
+    image:
+      tag: ''
+    port: 7070
+    servicePort: 7070
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      REDIS_ADDR: redis-cart:6379
+  currencyservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 7000
+    servicePort: 7000
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '7000'
+      DISABLE_PROFILER: '1'
+      ENABLE_TRACING: '0'
+  paymentservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 50051
+    servicePort: 50051
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '50051'
+      DISABLE_PROFILER: '1'
+      ENABLE_TRACING: '0'
+  shippingservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 50051
+    servicePort: 50051
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '50051'
+      DISABLE_PROFILER: '1'
+  emailservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 8080
+    servicePort: 5000
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '8080'
+      DISABLE_PROFILER: '1'
+      ENABLE_TRACING: '0'
+  checkoutservice:
+    enabled: true
+    replicas: 2
+    image:
+      tag: ''
+    port: 5050
+    servicePort: 5050
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '5050'
+      PRODUCT_CATALOG_SERVICE_ADDR: productcatalogservice:3550
+      SHIPPING_SERVICE_ADDR: shippingservice:50051
+      PAYMENT_SERVICE_ADDR: paymentservice:50051
+      EMAIL_SERVICE_ADDR: emailservice:5000
+      CURRENCY_SERVICE_ADDR: currencyservice:7000
+      CART_SERVICE_ADDR: cartservice:7070
+      ENABLE_TRACING: '0'
+      ENABLE_PROFILER: '0'
+  recommendationservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 8080
+    servicePort: 8080
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '8080'
+      PRODUCT_CATALOG_SERVICE_ADDR: productcatalogservice:3550
+      DISABLE_PROFILER: '1'
+      ENABLE_TRACING: '0'
+  adservice:
+    enabled: true
+    replicas: 1
+    image:
+      tag: ''
+    port: 9555
+    servicePort: 9555
+    health: grpc
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1536Mi
+        ephemeral-storage: 1Gi
+    env:
+      PORT: '9555'
+      DISABLE_TRACING: '1'
+      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=65.0 -Djava.io.tmpdir=/tmp
+  loadgenerator:
+    enabled: false
+    replicas: 1
+    image:
+      tag: ''
+    port: 0
+    servicePort: 0
+    health: process
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+    env:
+      FRONTEND_ADDR: frontend:80
+      USERS: '5'
+      RATE: '1'
