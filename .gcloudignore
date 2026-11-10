@@ -1,0 +1,19 @@
+# Allow only build inputs into the source archive; never send local notes or credentials.
+*
+!cloudbuild.yaml
+!services/
+!services/**
+**/.git
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/node_modules/
+**/.venv/
+**/venv/
+**/__pycache__/
+**/bin/
+**/obj/
+**/build/
+**/.gradle/
+**/.DS_Store

@@ -1,0 +1,80 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Modified by the Antojo project, 2026: simplified and hardened lab packaging.
+
+{{- if and .Values.frontend.externalService .Values.frontend.gateway.enabled }}
+{{- fail "Choose LoadBalancer OR Gateway: set frontend.externalService=false for Gateway" }}
+{{- end }}
+{{- if .Values.services.frontend.enabled }}
+{{- if .Values.frontend.externalService }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-external
+  labels:
+    {{- include "antojo.labels" . | nindent 4 }}
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+{{- end }}
+{{- if .Values.frontend.gateway.enabled }}
+# Requires the GKE Gateway controller and CRDs. HTTP only in this bridge.
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: antojo
+  labels:
+    {{- include "antojo.labels" . | nindent 4 }}
+spec:
+  gatewayClassName: {{ .Values.frontend.gateway.className }}
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: Same
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: antojo
+  labels:
+    {{- include "antojo.labels" . | nindent 4 }}
+spec:
+  parentRefs:
+    - name: antojo
+      sectionName: http
+  {{- if .Values.frontend.gateway.hostname }}
+  hostnames:
+    - {{ .Values.frontend.gateway.hostname | quote }}
+  {{- end }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: frontend
+          port: 80
+{{- end }}
+{{- end }}
