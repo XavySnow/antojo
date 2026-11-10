@@ -1,0 +1,160 @@
+# Temporary CI bridge: remote builds avoid eleven local toolchains on a Mac.
+# Triggered builds inherit SHORT_SHA; manual submits must supply _TAG=<git-sha>.
+# Each build-and-push step waits only for validation, enabling parallel execution.
+# Partial failures can leave pushed images; deployment waits for the whole build.
+steps:
+- id: validate
+  name: gcr.io/cloud-builders/docker
+  entrypoint: bash
+  env:
+  - IMAGE_TAG=${_TAG}
+  args:
+  - -ceu
+  - |
+    if [[ ! "$$IMAGE_TAG" =~ ^[0-9a-f]{7,40}$ ]]; then
+      echo 'Set _TAG to a Git commit SHA (7-40 hex characters); manual builds must supply it.' >&2
+      exit 1
+    fi
+    for context in services/frontend services/productcatalogservice services/cartservice/src services/currencyservice services/paymentservice services/shippingservice services/emailservice services/checkoutservice services/recommendationservice services/adservice services/loadgenerator; do
+      test -f "$$context/Dockerfile"
+    done
+- id: build-frontend
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/frontend:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/frontend
+    docker push "$$IMAGE"
+- id: build-productcatalogservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/productcatalogservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/productcatalogservice
+    docker push "$$IMAGE"
+- id: build-cartservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/cartservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/cartservice/src
+    docker push "$$IMAGE"
+- id: build-currencyservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/currencyservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/currencyservice
+    docker push "$$IMAGE"
+- id: build-paymentservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/paymentservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/paymentservice
+    docker push "$$IMAGE"
+- id: build-shippingservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/shippingservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/shippingservice
+    docker push "$$IMAGE"
+- id: build-emailservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/emailservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/emailservice
+    docker push "$$IMAGE"
+- id: build-checkoutservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/checkoutservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/checkoutservice
+    docker push "$$IMAGE"
+- id: build-recommendationservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/recommendationservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/recommendationservice
+    docker push "$$IMAGE"
+- id: build-adservice
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/adservice:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/adservice
+    docker push "$$IMAGE"
+- id: build-loadgenerator
+  name: gcr.io/cloud-builders/docker
+  waitFor:
+  - validate
+  entrypoint: bash
+  env:
+  - IMAGE=us-central1-docker.pkg.dev/antojo-lab/antojo/loadgenerator:${_TAG}
+  args:
+  - -ceu
+  - |
+    docker build --platform=linux/amd64 --tag "$$IMAGE" services/loadgenerator
+    docker push "$$IMAGE"
+substitutions:
+  _TAG: ${SHORT_SHA}
+options:
+  machineType: E2_HIGHCPU_8
+  dynamicSubstitutions: true
+  logging: CLOUD_LOGGING_ONLY
+serviceAccount: projects/antojo-lab/serviceAccounts/antojo-cloud-build@antojo-lab.iam.gserviceaccount.com
+timeout: 1800s
